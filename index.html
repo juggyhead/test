@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>testing</title>
+</head>
+<style>
+  #editor {
+    width: 800px;
+    height: 600px;
+    background-color: white;
+    border: 1px solid grey;
+    font-size: larger;
+    margin: 10px;
+    padding: 10px;
+  }
+</style>
+
+<body>
+  <div id="editor"></div>
+  <script>
+    var editor = document.getElementById("editor");
+    function printchar(e) {
+      console.log("\ntyped: ", e)
+      const char = e.data;
+
+      // If you want the keyCode..
+      const keyCode = char.charCodeAt(0); // a = 97
+
+      // Stop processing if "a" is pressed
+      if (keyCode === 97) {
+          e.preventDefault();
+          editor.innerHTML = editor.innerHTML + 'b';
+          editor.focus();
+          return false;
+      }
+      return true;
+    }
+    editor.contentEditable = true;
+    editor.focus();
+    editor.addEventListener('textInput', printchar);
+  </script>
+</body>
+</html>
