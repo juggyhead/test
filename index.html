@@ -17,28 +17,22 @@
 </style>
 
 <body>
-  <div id="editor"></div>
+  <div id="editor" oninput="printchar();"></div>
+  <textarea id="ta" rows="5" oninput="printchar();"></textarea>
+  <div id="console"></div>
   <script>
     var editor = document.getElementById("editor");
-    function printchar(e) {
-      console.log("\ntyped: ", e)
-      const char = e.data;
-
-      // If you want the keyCode..
-      const keyCode = char.charCodeAt(0); // a = 97
-
-      // Stop processing if "a" is pressed
-      if (keyCode === 97) {
-          e.preventDefault();
-          editor.innerHTML = editor.innerHTML + 'b';
-          editor.focus();
-          return false;
-      }
-      return true;
+    var console = document.getElementById("console");
+    console.log = function(str) {
+      console.innerHTML += "<br/>" + str;
+    }
+    function printchar() {
+      console.log("\ntyped: " + editor.innerHTML);
+      editor.innerHTML += "aa";
     }
     editor.contentEditable = true;
     editor.focus();
-    editor.addEventListener('textInput', printchar);
+    editor.addEventListener('oninput', printchar);
   </script>
 </body>
 </html>
